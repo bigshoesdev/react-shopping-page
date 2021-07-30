@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.scss';
+import Header from "./components/header/Header";
+import { ProductService } from "./service/product.service";
+import Products from "./components/products/Products";
+import ShoppingCart from "./components/shopping-cart/ShoppingCart";
+import { ShoppingProvider } from "./contexts/ShoppingContext";
+import "./App.scss";
 
-function App() {
+const productService = new ProductService();
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <ShoppingProvider>
+        <div className="left-container">
+          <div className="header-container">
+            <Header />
+          </div>
+          <div className="products-list-container">
+            <Products productService={productService} />
+          </div>
+        </div>
+        <div className="right-container">
+          <ShoppingCart />
+        </div>
+      </ShoppingProvider>
     </div>
   );
-}
+};
 
 export default App;
